@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+	"log"
+)
+
+func main() {
+	app := &cli.App{
+		Name:  "HealthChecker",
+		Usage: "A tiny tool that checks whether a website is running or down",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:     "domain",
+				Aliases:  []string{"d"},
+				Usage:    "Doamin number to check.",
+				Required: true,
+			},
+			&cli.StringFlag{
+				Name:     "port",
+				Aliases:  []string{"p"},
+				Usage:    "Port number to check",
+				Required: false,
+			},
+		},
+		Action: func(c cli.Context) error {
+			port := c.String("port")
+			if c.String("port") == "" {
+				port = "80"
+			}
+			status := Check(c.String("domain"), port)
+			fmt.Println(status)
+			return nil
+		},
+	}
+}
