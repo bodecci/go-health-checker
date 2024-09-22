@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+
+	"github.com/urfave/cli/v2"
 )
 
 func main() {
@@ -23,7 +26,7 @@ func main() {
 				Required: false,
 			},
 		},
-		Action: func(c cli.Context) error {
+		Action: func(c *cli.Context) error {
 			port := c.String("port")
 			if c.String("port") == "" {
 				port = "80"
@@ -32,5 +35,9 @@ func main() {
 			fmt.Println(status)
 			return nil
 		},
+	}
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
