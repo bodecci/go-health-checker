@@ -9,9 +9,11 @@ import (
 )
 
 func main() {
+	// Create a new CLI application with the urfave/cli package
 	app := &cli.App{
-		Name:  "HealthChecker",
+		Name:  "HealthChecker", // Set the application name
 		Usage: "A tiny tool that checks whether a website is running or down",
+		// Flags define the command-line options for the application
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:     "domain",
@@ -19,6 +21,7 @@ func main() {
 				Usage:    "Doamin number to check.",
 				Required: true,
 			},
+			// Another StringFlag for the port number, which is not required (defaults to 80 if not provided)
 			&cli.StringFlag{
 				Name:     "port",
 				Aliases:  []string{"p"},
